@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BillKaro - Business Dashboard for Invoice & Product Management</title>
+    <meta name="description" content="BillKaro is an all-in-one business dashboard solution for product management, invoicing, and customer relationship management. Streamline your business operations with our intuitive dashboard.">
+    <meta name="keywords" content="business dashboard, invoice management, product management, CRM, business software, billing software, small business tools">
+    <meta name="author" content="BillKaro">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://billkaro.netlify.app/">
+    <meta property="og:title" content="BillKaro - Business Dashboard Solution">
+    <meta property="og:description" content="Transform your business with our all-in-one dashboard for product management, invoicing, and customer relationships.">
+    <meta property="og:image" content="https://billkaro.netlify.app/images/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://billkaro.netlify.app/">
+    <meta property="twitter:title" content="BillKaro - Business Dashboard Solution">
+    <meta property="twitter:description" content="Transform your business with our all-in-one dashboard for product management, invoicing, and customer relationships.">
+    <meta property="twitter:image" content="https://billkaro.netlify.app/images/twitter-image.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://billkaro.netlify.app/">
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "BillKaro",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "All-in-one business dashboard for product management, invoicing, and customer relationships",
+        "url": "https://billkaro.netlify.app/",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "1250"
+        }
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a class="skip-to-content" href="#main-content" style="position: absolute; top: -40px; left: 0; background: var(--primary); color: white; padding: 8px; z-index: 10000; text-decoration: none;">Skip to main content</a>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo"><span>Bill</span>Karo</a>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#guide">Guide</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="login.html" class="btn" style="color: white;">Login/Signup</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Banner -->
+        <section class="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <h1>Transform Your Business with <span>BillKaro</span></h1>
+                    <p>An all-in-one dashboard solution that simplifies product management, invoicing, and customer relationships. Designed for businesses that value efficiency and clarity.</p>
+                    <div class="hero-buttons">
+                        <a href="signup.html" class="btn">Create Account</a>
+                        <a href="login.html" class="btn btn-secondary">Login</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                        alt="Dashboard Preview" class="dashboard-preview">
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Guide Section with YouTube Integration -->
+        <section class="video-guide" id="guide">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Get Started with Our Guidance Video</h2>
+                    <p>Watch our comprehensive 10-minute tutorial to learn how BillKaro can streamline your business operations.</p>
+                </div>
+
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <!-- YouTube Video Embed -->
+                        <iframe
+                            class="youtube-player"
+                            id="youtubePlayer"
+                            src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&controls=1&rel=0&modestbranding=1&showinfo=0"
+                            title="BillKaro Tutorial Video"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+
+                        <!-- Video Overlay (shown before play) -->
+                        <div class="video-overlay" id="videoOverlay">
+                            <i class="fas fa-play-circle"></i>
+                            <h3>BillKaro Complete Walkthrough</h3>
+                            <p>Click to play the tutorial video</p>
+                        </div>
+                    </div>
+
+                    <!-- Video Controls -->
+                    <div class="video-controls"
+                        style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
+                        <button id="playPauseBtn" class="btn"
+                            style="padding: 8px 20px; font-size: 14px;">
+                            <i class="fas fa-play"></i> Play Video
+                        </button>
+                        <button id="muteBtn" class="btn btn-secondary"
+                            style="padding: 8px 20px; font-size: 14px;">
+                            <i class="fas fa-volume-up"></i> Mute
+                        </button>
+                        <button id="fullscreenBtn" class="btn btn-secondary"
+                            style="padding: 8px 20px; font-size: 14px;">
+                            <i class="fas fa-expand"></i> Fullscreen
+                        </button>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <p style="color: var(--gray);">Video Duration: 10:25 | 
+                        <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" style="color: var(--primary); text-decoration: none;">
+                            Watch on YouTube <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Steps Section -->
+        <section class="steps" id="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Simple Steps to Get Started</h2>
+                    <p>Follow these four easy steps to transform your business management with BillKaro.</p>
+                </div>
+
+                <div class="steps-container">
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h3>1. Create Your Profile</h3>
+                        <p>Set up your company profile with branding and
+                            preferences in just minutes.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <i class="fas fa-box-open"></i>
+                        </div>
+                        <h3>2. Add Your Products</h3>
+                        <p>Import or manually add your products and services
+                            with detailed information.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                        <h3>3. Generate Invoices</h3>
+                        <p>Create professional invoices with automatic
+                            calculations and client tracking.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>4. Analyze & Grow</h3>
+                        <p>Use our analytics tools to track performance and make
+                            data-driven decisions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Section -->
+        <section class="demo" id="demo">
+            <div class="container demo-container">
+                <div class="demo-content">
+                    <h2>Experience BillKaro Live Demo</h2>
+                    <p>
+                        Try our interactive demo to explore all the powerful
+                        features of BillKaro without any registration. See for
+                        yourself how intuitive and efficient our dashboard
+                        is.
+                    </p>
+
+                    <ul class="demo-features">
+                        <li><i class="fas fa-check-circle"></i> Real-time data visualization</li>
+                        <li><i class="fas fa-check-circle"></i> Interactive product management</li>
+                        <li><i class="fas fa-check-circle"></i> Automated invoice generation</li>
+                        <li><i class="fas fa-check-circle"></i> Client relationship tracking</li>
+                        <li><i class="fas fa-check-circle"></i> Customizable reporting tools</li>
+                    </ul>
+                    <a href="#" class="btn">Launch Interactive Demo</a>
+                </div>
+
+                <div class="demo-visual">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                        alt="Dashboard Interface" class="demo-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- Clients Section -->
+        <section class="clients">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Trusted by Leading Businesses</h2>
+                    <p>Join thousands of companies that have transformed their operations with BillKaro.</p>
+                </div>
+
+                <div class="clients-logos">
+                    <div class="client-logo">TechNova Inc.</div>
+                    <div class="client-logo">Global Retail</div>
+                    <div class="client-logo">FinServe Corp</div>
+                    <div class="client-logo">HealthPlus Ltd</div>
+                    <div class="client-logo">EduSmart Solutions</div>
+                    <div class="client-logo">LogiChain Group</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2>What Our Clients Say</h2>
+                    <p>Hear from businesses that have transformed their operations with BillKaro.</p>
+                </div>
+
+                <div class="testimonials-container">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "BillKaro has completely transformed how we manage our inventory and invoices. The intuitive interface saved us countless hours of manual work each month."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">SJ</div>
+                            <div class="author-info">
+                                <h4>Sarah Johnson</h4>
+                                <p>CEO, TechNova Inc.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "The reporting features alone are worth the investment. We've improved our decision-making process significantly since implementing BillKaro."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">MR</div>
+                            <div class="author-info">
+                                <h4>Michael Rodriguez</h4>
+                                <p>Operations Director, Global Retail</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Excellent customer support and continuous improvements. BillKaro has become an essential tool for our growing business."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">AL</div>
+                            <div class="author-info">
+                                <h4>Amanda Lee</h4>
+                                <p>Finance Manager, FinServe Corp</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="container">
+                <h2>Ready to Transform Your Business?</h2>
+                <p>Join thousands of businesses using BillKaro to streamline
+                    their operations and drive growth. Start your free trial
+                    today.</p>
+                <a href="signup.html" class="btn">Start Free 14-Day Trial</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-container">
+                    <div class="footer-col">
+                        <a href="index.html" class="footer-logo"><span>Bill</span>Karo</a>
+                        <p>An all-in-one dashboard solution that simplifies
+                            product management, invoicing, and customer
+                            relationships for modern businesses.</p>
+                    </div>
+
+                    <div class="footer-col">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="#features">Features</a></li>
+                            <li><a href="#guide">Guide</a></li>
+                            <li><a href="#demo">Demo</a></li>
+                            <li><a href="#testimonials">Testimonials</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h3>Resources</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="https://youtu.be/dQw4w9WgXcQ" target="_blank">Video Tutorials</a></li>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">API Reference</a></li>
+                            <li><a href="#">Community Forum</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-col">
+                        <h3>Contact Us</h3>
+                        <ul class="footer-links">
+                            <li><a href="mailto:support@billkaro.com">support@billkaro.com</a></li>
+                            <li><a href="tel:+919735659798">+91 9735659798</a></li>
+                            <li>123 Business Ave, Suite 100</li>
+                            <li>San Francisco, CA 94107</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="copyright">
+                    <p>&copy; 2026 BillKaro. All rights reserved. | Designed for modern businesses</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="js/index.js"></script>
+    <script>
+    // Check if user is already logged in
+    document.addEventListener('DOMContentLoaded', function() {
+        const token = localStorage.getItem("token");
+        
+        // If user is logged in, redirect to dashboard
+        if (token) {
+            // Optional: Verify token with API before redirecting
+            fetch('https://api.dndconsultancytest.com/get-profile.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ token: token })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === true) {
+                    // Token is valid, redirect to dashboard
+                    window.location.href = 'dashboard.html';
+                } else {
+                    // Invalid token, clear and stay on home page
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('userName');
+                }
+            })
+            .catch(error => {
+                console.error('Error checking authentication:', error);
+                // If API fails, still redirect if token exists
+                window.location.href = 'dashboard.html';
+            });
+        }
+    });
+    </script>
+</body>
+</html>

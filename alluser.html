@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            background: #fff;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1000px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        th {
+            background: #2563eb;
+            color: #fff;
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Users List</h2>
+
+<div class="table-wrapper">
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Business</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>UPI</th>
+                <th>Address</th>
+                <th>Logo</th>
+                <th>Invoice Count</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="11">Loading...</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+fetch("https://api.dndconsultancytest.com/get-users.php")
+    .then(res => res.json())
+    .then(response => {
+        const tbody = document.querySelector("#userTable tbody");
+        tbody.innerHTML = "";
+
+        if (!response.status || response.data.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="11">No data found</td></tr>`;
+            return;
+        }
+
+        response.data.forEach(user => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>${user.id}</td>
+                    <td>${user.user_id}</td>
+                    <td>${user.name ?? '-'}</td>
+                    <td>${user.business_name ?? '-'}</td>
+                    <td>${user.email ?? '-'}</td>
+                    <td>${user.phone ?? '-'}</td>
+                    <td>${user.upi_id ?? '-'}</td>
+                    <td>${user.address ?? '-'}</td>
+                    <td>
+                        ${user.logo 
+                            ? `<img src="${user.logo}" alt="logo">`
+                            : '-'}
+                    </td>
+                    <td>${user.invoice_counter}</td>
+                    <td>${user.created_at}</td>
+                </tr>
+            `;
+        });
+    })
+    .catch(error => {
+        console.error(error);
+        document.querySelector("#userTable tbody").innerHTML =
+            `<tr><td colspan="11">Error loading data</td></tr>`;
+    });
+</script>
+
+</body>
+</html>

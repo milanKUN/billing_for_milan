@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/invoice.css">
+</head>
+
+<body>
+    <!-- Watermark -->
+    <div class="watermark" id="watermark">PAID</div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div style="text-align: center;">
+            <div class="spinner"></div>
+            <div id="loadingText">Saving Invoice...</div>
+        </div>
+    </div>
+
+    <!-- Client Form Modal -->
+    <div class="client-form-modal" id="clientFormModal">
+        <div class="client-form-container">
+            <div class="client-form-header">
+                <div class="client-form-title" id="clientFormTitle">Add New
+                    Client</div>
+                <button class="close-client-form" onclick="closeClientForm()">&times;</button>
+            </div>
+            <div id="clientForm">
+                <div class="client-form-group">
+                    <label class="client-form-label">Full Name *</label>
+                    <input type="text" class="client-form-input" id="formClientName" placeholder="Client Name" required>
+                </div>
+                <div class="client-form-group">
+                    <label class="client-form-label">Company</label>
+                    <input type="text" class="client-form-input" id="formClientCompany" placeholder="Company Name">
+                </div>
+                <div class="client-form-group">
+                    <label class="client-form-label">Phone Number *</label>
+                    <input type="tel" class="client-form-input" id="formClientPhone" placeholder="Phone Number"
+                        required>
+                </div>
+                <div class="client-form-group">
+                    <label class="client-form-label">Email</label>
+                    <input type="email" class="client-form-input" id="formClientEmail" placeholder="Email Address">
+                </div>
+                <div class="client-form-group">
+                    <label class="client-form-label">Address</label>
+                    <textarea class="client-form-input" id="formClientAddress" placeholder="Address"
+                        rows="3"></textarea>
+                </div>
+                <div class="client-form-buttons">
+                    <button type="button" class="client-form-cancel" onclick="closeClientForm()">Cancel</button>
+                    <button type="button" class="client-form-submit" onclick="saveClientFromForm()">Save Client</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile View (for editing) -->
+    <div class="desktop-view" id="mobileView">
+        <div class="section">
+            <div class="header">
+                <div class="logo-area" onclick="document.getElementById('logoInput').click()">
+                    <img class="logo-preview" id="mobileLogoPreview" alt="Logo">
+                    <div class="logo-placeholder">Click to upload logo</div>
+                    <input type="file" id="logoInput" accept="image/*" onchange="uploadLogo(event)"
+                        style="display: none;">
+                </div>
+
+                <div class="company-info">
+                    <div class="company-name" contenteditable id="mobileCompanyName">Your Company Name</div>
+                    <div contenteditable id="mobileCompanyAddress">123
+                        Business Street, City</div>
+                    <div contenteditable id="mobileCompanyPhone">Phone:
+                        (123) 456-7890</div>
+                    <div contenteditable id="mobileCompanyEmail">Email:
+                        info@company.com</div>
+                </div>
+
+                <div class="invoice-meta">
+                    <div>Invoice #: <span id="mobileInvoiceNumber">INV-001</span></div>
+                    <div>Date: <span contenteditable id="mobileInvoiceDate">2024-01-15</span></div>
+                    <div>Status: <span class="status-badge status-unpaid" id="mobileStatus">UNPAID</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Client Selection Section -->
+        <div class="section">
+            <div class="client-select-wrapper">
+                <label class="client-select-label">Select Client by Phone
+                    Number</label>
+                <div class="client-search-container">
+                    <input type="text" class="client-search-input" id="clientSearchInput"
+                        placeholder="Enter phone number to search client..." oninput="searchClientByPhone(this.value)">
+                    <button class="client-search-button" onclick="searchClient()">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+
+                <div class="client-dropdown" id="clientDropdown"></div>
+
+                <div id="clientInfoSection" class="client-info-section" style="display: none;">
+                    <div class="client-info-row">
+                        <span class="client-info-label">Name:</span>
+                        <span class="client-info-value" id="selectedClientName">-</span>
+                    </div>
+                    <div class="client-info-row">
+                        <span class="client-info-label">Company:</span>
+                        <span class="client-info-value" id="selectedClientCompany">-</span>
+                    </div>
+                    <div class="client-info-row">
+                        <span class="client-info-label">Phone:</span>
+                        <span class="client-info-value" id="selectedClientPhone">-</span>
+                    </div>
+                    <div class="client-info-row">
+                        <span class="client-info-label">Email:</span>
+                        <span class="client-info-value" id="selectedClientEmail">-</span>
+                    </div>
+                    <div class="client-info-row">
+                        <span class="client-info-label">Address:</span>
+                        <span class="client-info-value addstl" id="selectedClientAddress">-</span>
+                    </div>
+                    <div>
+                        <button class="edit-client-btn" onclick="editSelectedClient()">
+                            <i class="fas fa-edit"></i> Edit Client
+                        </button>
+                        <button class="clear-client-btn" onclick="clearSelectedClient()">
+                            <i class="fas fa-times"></i> Clear
+                        </button>
+                    </div>
+                </div>
+
+                <button class="new-client-btn" onclick="showNewClientForm()">
+                    <i class="fas fa-plus"></i> Add New Client
+                </button>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="bill-to">
+                <strong>Bill To:</strong>
+                <div contenteditable id="mobileClientName">Client Name</div>
+                <div contenteditable id="mobileClientCompany">Client
+                    Company</div>
+                <div contenteditable id="mobileClientAddress">Client
+                    Address</div>
+                <div contenteditable id="mobileClientEmail">Email:
+                    client@email.com</div>
+                <div contenteditable id="mobileClientPhone">Phone: (987)
+                    654-3210</div>
+            </div>
+        </div>
+
+        <div class="section" style="overflow-y: auto;">
+            <div>
+                <table id="mobileItemsTable">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th width="80">Qty</th>
+                            <th width="100">Price</th>
+                            <th width="100">Amount</th>
+                            <th width="50">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mobileItemsBody"></tbody>
+                </table>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <button class="btn btn-secondary" onclick="addItemRow()">+
+                    Add Item</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="totals">
+                <div>Subtotal: ₹ <span id="mobileSubtotal">0.00</span></div>
+                <div>Tax (<input type="number" id="mobileTaxPercent" value="18" style="width: 60px; padding: 4px;"
+                        oninput="calculateTotals()">%): ₹ <span id="mobileTaxAmount">0.00</span></div>
+                <div style="font-size: 18px; font-weight: bold; margin-top: 10px;">
+                    Total: ₹ <span id="mobileTotal">0.00</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <strong>Payment Status</strong>
+            <select id="paymentStatus" onchange="updatePaymentStatus(this.value)"
+                style="width: 100%; margin: 10px 0; padding: 8px;">
+                <option value="unpaid">UNPAID</option>
+                <option value="paid">PAID</option>
+            </select>
+        </div>
+
+        <div class="section" style="margin-bottom: 100px;">
+            <div class="payment-row">
+                <div style="flex: 1;">
+                    <strong>Payment Details</strong>
+                    <div style="margin: 10px 0;">
+                        <label>UPI ID:</label>
+                        <input type="text" id="mobileUpiId" placeholder="your.upi@bank" style="width: 100%;"
+                            oninput="handleUpiIdChange()">
+                    </div>
+                </div>
+
+                <div class="qr-container" id="mobileQrContainer">
+                    <div style="font-size: 12px; font-weight: bold; margin-bottom: 10px;">SCAN
+                        TO PAY</div>
+                    <div id="mobileQrCode"></div>
+                    <div id="mobileUpiText" style="font-size: 11px; margin-top: 10px; word-break: break-all;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF View (hidden during editing) -->
+    <div class="pdf-view" id="pdfView">
+        <div class="header">
+            <div class="logo-area">
+                <img class="logo-preview" id="pdfLogoPreview" alt="Logo">
+            </div>
+
+            <div class="company-info">
+                <div class="company-name" id="pdfCompanyName">Your Company
+                    Name</div>
+                <div id="pdfCompanyAddress">123 Business Street, City</div>
+                <div id="pdfCompanyPhone">Phone: (123) 456-7890</div>
+                <div id="pdfCompanyEmail">Email: info@company.com</div>
+            </div>
+
+            <div class="invoice-meta">
+                <br><br>
+                <div>Invoice #:<br> <span id="pdfInvoiceNumber">INV-001</span></div>
+                <div>Date: <span id="pdfInvoiceDate">2024-01-15</span></div>
+                <div>Status: <span class="status-badge status-unpaid" id="pdfStatus">UNPAID</span></div>
+            </div>
+        </div>
+
+        <div style="border: 1px solid #000; padding: 15px; margin-bottom: 20px;">
+            <strong>Bill To:</strong>
+            <div id="pdfClientName">Client Name</div>
+            <div id="pdfClientCompany">Client Company</div>
+            <div id="pdfClientAddress">Client Address</div>
+            <div id="pdfClientEmail">Email: client@email.com</div>
+            <div id="pdfClientPhone">Phone: (987) 654-3210</div>
+        </div>
+
+        <table id="pdfItemsTable">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th width="80">Qty</th>
+                    <th width="100">Unit Price</th>
+                    <th width="120">Amount</th>
+                </tr>
+            </thead>
+            <tbody id="pdfItemsBody"></tbody>
+        </table>
+
+        <div class="totals">
+            <div>Subtotal: ₹ <span id="pdfSubtotal">0.00</span></div>
+            <div>Tax (<span id="pdfTaxPercent">18</span>%): ₹ <span id="pdfTaxAmount">0.00</span></div>
+            <div style="font-size: 20px; font-weight: bold; margin-top: 15px;">
+                Total: ₹ <span id="pdfTotal">0.00</span>
+            </div>
+        </div>
+
+        <div class="payment-row" id="pdfPaymentSection">
+            <div class="payment-details">
+                <strong>Payment Instructions</strong>
+                <p style="margin: 10px 0;">Please pay within 30 days of
+                    invoice date.</p>
+                <div style="margin: 15px 0;">
+                    <strong>UPI ID:</strong> <span id="pdfUpiId">your.upi@bank</span>
+                </div>
+            </div>
+
+            <div class="qr-container" id="pdfQrContainer">
+                <div style="font-size: 11px; font-weight: bold; margin-bottom: 10px;">SCAN
+                    TO PAY</div>
+                <div id="pdfQrCode"></div>
+                <div id="pdfUpiText" style="font-size: 10px; margin-top: 10px; word-break: break-all;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+        <button class="btn btn-secondary" onclick="addItemRow()">Add
+            Item</button>
+        <button class="btn btn-save" onclick="saveInvoice(true)">Save
+            Invoice</button>
+        <button class="btn btn-primary" onclick="saveAndDownload()">Download
+            PDF</button>
+    </div>
+
+    <script src="js/invoice.js"></script>
+</body>
+
+</html>

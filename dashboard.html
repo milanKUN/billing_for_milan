@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Welcome</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+    <!-- Overlay for mobile sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="logo">
+            <i class="fas fa-boxes"></i>
+            <h1>BillKaro</h1>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="dashboard.html" class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+            <a href="products.html" class="nav-item">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Products</span>
+            </a>
+            <a href="invoice.html" class="nav-item">
+                <i class="fas fa-project-diagram"></i>
+                <span>Invoice</span>
+            </a>
+        </nav>
+
+        <div class="user-profile">
+            <div class="user-avatar" id="userAvatar">JS</div>
+            <div class="user-info">
+                <h4 id="userName">John Smith</h4>
+                <p>Administrator</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="page-title">
+                <h2>Welcome Back, <span id="welcomeName">John</span>!</h2>
+                <p>Here's what's happening with your projects today.</p>
+            </div>
+
+            <div class="top-bar-actions">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+
+                <div class="notification">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <div class="notification-badge"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-cards">
+
+            <!-- <div class="stat-card primary">
+                <div class="stat-header">
+                    <div class="stat-info">
+                        <h3>Total Revenue</h3>
+                        <div class="stat-value">$24,580</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>12.5% from last month</span>
+                        </div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="stat-card success">
+                <div class="stat-header">
+                    <div class="stat-info">
+                        <h3>Total Users</h3>
+                        <div class="stat-value">1,254</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>8.2% from last week</span>
+                        </div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card warning">
+                <div class="stat-header">
+                    <div class="stat-info">
+                        <h3>Active User</h3>
+                        <div class="stat-value">180</div>
+                        <div class="stat-change negative">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>last 1hours</span>
+                        </div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="stat-card danger">
+                <div class="stat-header">
+                    <div class="stat-info">
+                        <h3>Pending Tasks</h3>
+                        <div class="stat-value">42</div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>5 from yesterday</span>
+                        </div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- Projects Table -->
+        <!-- <div class="projects-section">
+            <div class="section-header">
+                <h3>Recent Projects</h3>
+                <a href="#">
+                    <span>View All Projects</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="projects-table">
+                    <thead>
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Team</th>
+                            <th>Status</th>
+                            <th>Progress</th>
+                            <th>Due Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="project-name">
+                                    <div class="project-avatar">WD</div>
+                                    <div class="project-info">
+                                        <h4>Website Redesign</h4>
+                                        <p>UI/UX Development</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Design Team</td>
+                            <td>
+                                <span class="status-badge in-progress">In
+                                    Progress</span>
+                            </td>
+                            <td>
+                                <div
+                                    style="background: var(--gray-light); height: 6px; border-radius: 3px; width: 100%; margin-top: 5px;">
+                                    <div
+                                        style="background: var(--warning); width: 75%; height: 100%; border-radius: 3px;">
+                                    </div>
+                                </div>
+                                <span style="font-size: 13px; margin-top: 3px; display: block;">75%</span>
+                            </td>
+                            <td>Jun 15, 2023</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="project-name">
+                                    <div class="project-avatar">MA</div>
+                                    <div class="project-info">
+                                        <h4>Mobile App</h4>
+                                        <p>iOS & Android</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Mobile Team</td>
+                            <td>
+                                <span class="status-badge completed">Completed</span>
+                            </td>
+                            <td>
+                                <div
+                                    style="background: var(--gray-light); height: 6px; border-radius: 3px; width: 100%; margin-top: 5px;">
+                                    <div
+                                        style="background: var(--success); width: 100%; height: 100%; border-radius: 3px;">
+                                    </div>
+                                </div>
+                                <span style="font-size: 13px; margin-top: 3px; display: block;">100%</span>
+                            </td>
+                            <td>May 28, 2023</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="project-name">
+                                    <div class="project-avatar">DB</div>
+                                    <div class="project-info">
+                                        <h4>Database Migration</h4>
+                                        <p>Infrastructure Upgrade</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>DevOps Team</td>
+                            <td>
+                                <span class="status-badge pending">Pending</span>
+                            </td>
+                            <td>
+                                <div
+                                    style="background: var(--gray-light); height: 6px; border-radius: 3px; width: 100%; margin-top: 5px;">
+                                    <div style="background: var(--gray); width: 30%; height: 100%; border-radius: 3px;">
+                                    </div>
+                                </div>
+                                <span style="font-size: 13px; margin-top: 3px; display: block;">30%</span>
+                            </td>
+                            <td>Jul 10, 2023</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div> -->
+
+        <!-- Logout Button -->
+        <button class="logout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </button>
+    </main>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>
